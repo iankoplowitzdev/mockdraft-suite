@@ -1,0 +1,11 @@
+version: "3.7"
+
+services:
+  ui:
+    build:
+      context: ../ui/
+      target: development
+    volumes:
+      - "../ui:/opt/mockDraft/ui"
+    ports:
+      - "3000:3000"

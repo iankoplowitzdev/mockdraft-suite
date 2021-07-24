@@ -1,0 +1,29 @@
+version: "3.7"
+
+services:
+  api:
+    image: "api:local-dev"
+    build:
+      context: ../api/
+    volumes:
+      - "../api:/opt/mockDraft/api"
+    ports:
+      - "3002:3002"
+    depends_on:
+      - mongo
+  ui:
+    image: "ui:local-dev"
+    depends_on:
+      - api
+  mongo:
+    image: mongo:4.2-bionic
+    restart: always
+    ports:  
+      - "27017:27017"
+    volumes:
+      - "/home/ian/Documents/projects/storage/mockDraft:/data/db"
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
